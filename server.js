@@ -57,7 +57,7 @@ app.get('/images/:filename', (req, res) => {
             // Imposta il content type corretto
             const ext = path.extname(filename).toLowerCase();
             const mimeTypes = {
-                '.jpg': 'image/jpeg',
+                '.jpg': 'image/jpg',
                 '.jpeg': 'image/jpeg',
                 '.png': 'image/png',
                 '.gif': 'image/gif',
