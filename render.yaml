@@ -3,8 +3,8 @@ services:
     name: launchcoin
     runtime: node
     buildCommand: npm install
-    startCommand: npm start
+    startCommand: node server.js
+    plan: free
     envVars:
       - key: NODE_VERSION
-        value: 18.0.0
-    plan: free
+        value: 18.18.0
