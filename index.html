@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LaunchCoin Solana - Create Your Token</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css">
     <!-- Font Awesome per icone di fallback -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -13,7 +13,7 @@
     <!-- ===== NAVIGATION (SOLO IMMAGINE, SENZA TESTO) ===== -->
     <nav class="nav-container" id="navbar">
         <a href="#" class="logo-container">
-            <img src="images/logo-nav-full.png" alt="LaunchCoin Solana" class="nav-logo-full" 
+            <img src="/images/logo-nav-full.png" alt="LaunchCoin Solana" class="nav-logo-full" 
                  onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'logo-icon\'><i class=\'fas fa-rocket\' style=\'color:#00ffa3;font-size:28px;\'></i></div><div><span class=\'logo-text\'>LaunchCoin</span><span class=\'logo-sub\'>Solana</span></div>'">
         </a>
         <div class="main-nav">
@@ -31,17 +31,19 @@
 
     <!-- ===== HERO WITH BACKGROUND ===== -->
     <section class="hero-section" id="heroSection">
+        <!-- ===== SFONDO CON PERCORSO ASSOLUTO ===== -->
         <div class="hero-background" id="heroBackground" 
-     style="background-image: url('/images/background.jpg'); 
-            background-color: #0a0a1a;
-            background-size: cover;
-            background-position: center;">
-</div>
+             style="background-image: url('/images/background.jpg'); 
+                    background-color: #0a0a1a;
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;">
+        </div>
         
         <div class="hero-content">
-            <!-- ===== LOGO GRANDE - NON SCHIACCIATO ===== -->
+            <!-- ===== LOGO GRANDE ===== -->
             <div class="hero-logo-container">
-                <img src="images/logo-large.png" alt="LaunchCoin" class="hero-logo" id="heroLogo" 
+                <img src="/images/logo-large.png" alt="LaunchCoin" class="hero-logo" id="heroLogo" 
                      onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-rocket\' style=\'color:#00ffa3;font-size:80px;\'></i>'">
             </div>
             
@@ -72,13 +74,13 @@
             <!-- ===== CREATE TOKEN BOX ===== -->
             <div class="create-box" id="create">
                 <div class="create-box-title">
-                    <img src="images/icon-create.png" alt="Create" style="width: 24px; height: 24px; display: inline-block; vertical-align: middle; margin-right: 8px;" onerror="this.style.display='none'">
+                    <img src="/images/icon-create.png" alt="Create" style="width: 24px; height: 24px; display: inline-block; vertical-align: middle; margin-right: 8px;" onerror="this.style.display='none'">
                     <span>Create Your Token</span>
                 </div>
 
                 <div class="form-group">
                     <label>
-                        <img src="images/icon-name.png" alt="Name" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                        <img src="/images/icon-name.png" alt="Name" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
                         Token Name
                     </label>
                     <input type="text" id="tokenName" placeholder="e.g. My Awesome Token" required>
@@ -86,7 +88,7 @@
 
                 <div class="form-group">
                     <label>
-                        <img src="images/icon-symbol.png" alt="Symbol" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                        <img src="/images/icon-symbol.png" alt="Symbol" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
                         Symbol (max 6 chars)
                     </label>
                     <input type="text" id="tokenSymbol" placeholder="e.g. LCT" maxlength="6" required>
@@ -95,14 +97,14 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>
-                            <img src="images/icon-decimals.png" alt="Decimals" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                            <img src="/images/icon-decimals.png" alt="Decimals" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
                             Decimals
                         </label>
                         <input type="number" id="tokenDecimals" value="9" min="0" max="9">
                     </div>
                     <div class="form-group">
                         <label>
-                            <img src="images/icon-supply.png" alt="Supply" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                            <img src="/images/icon-supply.png" alt="Supply" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
                             Initial Supply
                         </label>
                         <input type="number" id="tokenSupply" value="1000000" min="1">
@@ -111,7 +113,7 @@
 
                 <div class="form-group">
                     <label>
-                        <img src="images/icon-network.png" alt="Network" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                        <img src="/images/icon-network.png" alt="Network" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
                         Network
                     </label>
                     <select id="networkSelect">
@@ -124,7 +126,7 @@
                 <div style="background: rgba(0,255,163,0.05); border-radius: 12px; padding: 14px; margin: 16px 0; border: 1px solid rgba(0,255,163,0.1);">
                     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
                         <span style="font-size: 13px; color: var(--text-secondary);">
-                            <img src="images/icon-gem.png" alt="Gem" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;" onerror="this.style.display='none'">
+                            <img src="/images/icon-gem.png" alt="Gem" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;" onerror="this.style.display='none'">
                             Creation fee:
                         </span>
                         <span style="font-size: 18px; font-weight: 700; color: var(--accent-green);">0.05 SOL</span>
@@ -132,14 +134,13 @@
                     </div>
                 </div>
 
-                <!-- ===== PULSANTE CREATE TOKEN ===== -->
                 <button class="create-btn" id="createBtn">
-                    <img src="images/icon-create-btn.png" alt="Create" class="btn-icon" onerror="this.style.display='none'">
+                    <img src="/images/icon-create-btn.png" alt="Create" class="btn-icon" onerror="this.style.display='none'">
                     Create Token
                 </button>
 
                 <div style="margin-top: 12px; font-size: 12px; color: var(--text-muted); text-align: center;">
-                    <img src="images/icon-clock.png" alt="Clock" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;" onerror="this.style.display='none'">
+                    <img src="/images/icon-clock.png" alt="Clock" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;" onerror="this.style.display='none'">
                     Estimated time: 1-2 min after payment
                 </div>
             </div>
@@ -157,7 +158,7 @@
         <div class="memecoin-header">
             <span class="memecoin-title">
                 <span class="memecoin-text">Trending Meme Coins</span>
-                <img src="images/title-memecoin.png" alt="Trending Meme Coins" class="section-title-img" 
+                <img src="/images/title-memecoin.png" alt="Trending Meme Coins" class="section-title-img" 
                      onerror="this.style.display='none'">
             </span>
             <span class="memecoin-badge" id="liveBadge">● Live</span>
@@ -166,7 +167,7 @@
         <div class="memecoin-grid" id="memecoinGrid">
             <!-- Memecoin 1 - Dogecoin -->
             <div class="memecoin-card" data-coin="dogecoin">
-                <img src="images/meme-dogecoin.png" alt="Dogecoin" class="memecoin-icon">
+                <img src="/images/meme-dogecoin.png" alt="Dogecoin" class="memecoin-icon">
                 <div class="memecoin-info">
                     <span class="meme-name">Dogecoin</span>
                     <span class="meme-symbol">DOGE</span>
@@ -177,7 +178,7 @@
 
             <!-- Memecoin 2 - Shiba Inu -->
             <div class="memecoin-card" data-coin="shiba-inu">
-                <img src="images/meme-shiba.png" alt="Shiba Inu" class="memecoin-icon">
+                <img src="/images/meme-shiba.png" alt="Shiba Inu" class="memecoin-icon">
                 <div class="memecoin-info">
                     <span class="meme-name">Shiba Inu</span>
                     <span class="meme-symbol">SHIB</span>
@@ -188,7 +189,7 @@
 
             <!-- Memecoin 3 - Pepe -->
             <div class="memecoin-card" data-coin="pepe">
-                <img src="images/meme-pepe.png" alt="Pepe" class="memecoin-icon">
+                <img src="/images/meme-pepe.png" alt="Pepe" class="memecoin-icon">
                 <div class="memecoin-info">
                     <span class="meme-name">Pepe</span>
                     <span class="meme-symbol">PEPE</span>
@@ -199,7 +200,7 @@
 
             <!-- Memecoin 4 - Bonk -->
             <div class="memecoin-card" data-coin="bonk">
-                <img src="images/meme-bonk.png" alt="Bonk" class="memecoin-icon">
+                <img src="/images/meme-bonk.png" alt="Bonk" class="memecoin-icon">
                 <div class="memecoin-info">
                     <span class="meme-name">Bonk</span>
                     <span class="meme-symbol">BONK</span>
@@ -210,7 +211,7 @@
 
             <!-- Memecoin 5 - Floki -->
             <div class="memecoin-card" data-coin="floki">
-                <img src="images/meme-floki.png" alt="Floki" class="memecoin-icon">
+                <img src="/images/meme-floki.png" alt="Floki" class="memecoin-icon">
                 <div class="memecoin-info">
                     <span class="meme-name">Floki</span>
                     <span class="meme-symbol">FLOKI</span>
@@ -221,7 +222,7 @@
 
             <!-- Memecoin 6 - Wojak -->
             <div class="memecoin-card" data-coin="wojak">
-                <img src="images/meme-wojak.png" alt="Wojak" class="memecoin-icon">
+                <img src="/images/meme-wojak.png" alt="Wojak" class="memecoin-icon">
                 <div class="memecoin-info">
                     <span class="meme-name">Wojak</span>
                     <span class="meme-symbol">WOJAK</span>
@@ -242,17 +243,17 @@
     <!-- ===== FINE SEZIONE MEMECOIN ===== -->
 
     <!-- ===== FEATURES ===== -->
-    <section class="features-section" id="features" style="background-image: url('images/features-bg.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <section class="features-section" id="features" style="background-image: url('/images/features-bg.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
         <div style="background: rgba(10, 10, 26, 0.75); padding: 60px 32px; margin: -60px -32px; border-radius: 0;">
             <div class="section-title-container">
-                <img src="images/title-features.png" alt="Why LaunchCoin?" class="section-title-img" 
+                <img src="/images/title-features.png" alt="Why LaunchCoin?" class="section-title-img" 
                      onerror="this.style.display='none'; this.parentElement.innerHTML='<h2 class=\'section-title\'><span>⭐ Why LaunchCoin?</span></h2>'">
             </div>
             <div class="features-grid">
                 <!-- FEATURE 1 - FAST -->
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <img src="images/icon-fast.png" alt="Fast" style="width: 50px; height: 50px; display: inline-block;" 
+                        <img src="/images/icon-fast.png" alt="Fast" style="width: 50px; height: 50px; display: inline-block;" 
                              onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-bolt\' style=\'font-size:40px;color:var(--accent-green);\'></i>'">
                     </div>
                     <h3>Instant Deployment</h3>
@@ -262,7 +263,7 @@
                 <!-- FEATURE 2 - SHIELD -->
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <img src="images/icon-shield.png" alt="Secure" style="width: 50px; height: 50px; display: inline-block;" 
+                        <img src="/images/icon-shield.png" alt="Secure" style="width: 50px; height: 50px; display: inline-block;" 
                              onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-shield-alt\' style=\'font-size:40px;color:var(--accent-green);\'></i>'">
                     </div>
                     <h3>Secure & Reliable</h3>
@@ -272,7 +273,7 @@
                 <!-- FEATURE 3 - LIQUIDITY -->
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <img src="images/icon-liquidity.png" alt="Liquidity" style="width: 50px; height: 50px; display: inline-block;" 
+                        <img src="/images/icon-liquidity.png" alt="Liquidity" style="width: 50px; height: 50px; display: inline-block;" 
                              onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-water\' style=\'font-size:40px;color:var(--accent-green);\'></i>'">
                     </div>
                     <h3>Liquidity Ready</h3>
@@ -282,7 +283,7 @@
                 <!-- FEATURE 4 - SUPPORT -->
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <img src="images/icon-support.png" alt="Support" style="width: 50px; height: 50px; display: inline-block;" 
+                        <img src="/images/icon-support.png" alt="Support" style="width: 50px; height: 50px; display: inline-block;" 
                              onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-headset\' style=\'font-size:40px;color:var(--accent-green);\'></i>'">
                     </div>
                     <h3>24/7 Support</h3>
@@ -293,37 +294,37 @@
     </section>
 
     <!-- ===== DASHBOARD ===== -->
-    <section class="dashboard-section" id="dashboard" style="background-image: url('images/dashboard-bg.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <section class="dashboard-section" id="dashboard" style="background-image: url('/images/dashboard-bg.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
         <div style="background: rgba(10, 10, 26, 0.75); padding: 40px 32px 60px; margin: -40px -32px -60px; border-radius: 0; min-height: 100%;">
             <div class="section-title-container">
-                <img src="images/title-dashboard.png" alt="Dashboard" class="section-title-img" 
+                <img src="/images/title-dashboard.png" alt="Dashboard" class="section-title-img" 
                      onerror="this.style.display='none'; this.parentElement.innerHTML='<h2 class=\'section-title\'><span>📊 Dashboard</span></h2>'">
             </div>
             <div class="dashboard-grid">
                 <div class="dashboard-card">
                     <div class="dash-label">
-                        <img src="images/icon-token.png" alt="Tokens" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                        <img src="/images/icon-token.png" alt="Tokens" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
                         Tokens Created
                     </div>
                     <div class="dash-value" id="dashTokens">1,247</div>
                 </div>
                 <div class="dashboard-card">
                     <div class="dash-label">
-                        <img src="images/icon-volume.png" alt="Volume" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                        <img src="/images/icon-volume.png" alt="Volume" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
                         24h Volume
                     </div>
                     <div class="dash-value" id="dashVolume">$57.2K</div>
                 </div>
                 <div class="dashboard-card">
                     <div class="dash-label">
-                        <img src="images/icon-users.png" alt="Users" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                        <img src="/images/icon-users.png" alt="Users" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
                         Active Users
                     </div>
                     <div class="dash-value" id="dashUsers">19K+</div>
                 </div>
                 <div class="dashboard-card">
                     <div class="dash-label">
-                        <img src="images/icon-status.png" alt="Status" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                        <img src="/images/icon-status.png" alt="Status" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
                         Network Status
                     </div>
                     <div class="dash-value" id="dashStatus">Online</div>
@@ -335,7 +336,7 @@
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="footer-copy">
-            <img src="images/icon-footer.png" alt="LaunchCoin" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+            <img src="/images/icon-footer.png" alt="LaunchCoin" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
             © 2025 LaunchCoin • Built on Solana
         </div>
         <div class="footer-links">
@@ -359,12 +360,12 @@
             
             <!-- ===== LOGO NEL MODAL (NON SCHIACCIATO) ===== -->
             <div style="text-align: center; margin-bottom: 16px;">
-                <img src="images/logo-large.png" alt="LaunchCoin" class="modal-logo" 
+                <img src="/images/logo-large.png" alt="LaunchCoin" class="modal-logo" 
                      onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-rocket\' style=\'color:#00ffa3;font-size:60px;\'></i>'">
             </div>
             
             <h2 style="font-size: 24px; font-weight: 700; color: var(--text-primary); text-align: center;">
-                <img src="images/icon-payment.png" alt="Payment" style="width: 24px; height: 24px; display: inline-block; vertical-align: middle; margin-right: 8px;" onerror="this.style.display='none'">
+                <img src="/images/icon-payment.png" alt="Payment" style="width: 24px; height: 24px; display: inline-block; vertical-align: middle; margin-right: 8px;" onerror="this.style.display='none'">
                 Complete Your Payment
             </h2>
             <p style="color: var(--text-secondary); font-size: 14px; margin-top: 6px; text-align: center;">
@@ -377,7 +378,7 @@
             <!-- WALLET ADDRESS -->
             <div style="background: rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; border: 1px solid var(--border-color); margin-bottom: 14px;">
                 <div style="display: flex; align-items: center; gap: 12px;">
-                    <span style="font-size: 20px;"></span>
+                    <span style="font-size: 20px;">📤</span>
                     <code id="paymentAddress" style="flex: 1; font-size: 13px; color: var(--text-primary); word-break: break-all; font-family: monospace; line-height: 1.4;">
                         9GD63MUwf1SzLs59UFZCmA7NLABkYYWrx8PVG3CmXBMo
                     </code>
@@ -386,14 +387,14 @@
             
             <!-- COPY BUTTON -->
             <button id="copyAddressBtn" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid rgba(0,255,163,0.25); background: rgba(0,255,163,0.06); color: var(--accent-green); font-weight: 600; font-size: 14px; cursor: pointer; transition: var(--transition); margin-bottom: 16px;">
-                <img src="images/icon-copy.png" alt="Copy" style="width: 18px; height: 18px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                <img src="/images/icon-copy.png" alt="Copy" style="width: 18px; height: 18px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
                 Copy Address
             </button>
             
             <!-- AMOUNT TO SEND -->
             <div style="background: rgba(255,215,0,0.08); border-radius: 12px; padding: 20px; border: 1px solid rgba(255,215,0,0.15); margin-bottom: 20px; text-align: center;">
                 <div style="font-size: 13px; color: var(--text-secondary);">
-                    <img src="images/icon-coins.png" alt="Coins" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                    <img src="/images/icon-coins.png" alt="Coins" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
                     Amount to send:
                 </div>
                 <div style="font-size: 36px; font-weight: 800; color: var(--accent-gold); letter-spacing: -0.5px;">0.05 SOL</div>
@@ -411,7 +412,7 @@
             <!-- INSTRUCTIONS -->
             <div style="background: rgba(0,212,255,0.04); border-radius: 12px; padding: 16px; border: 1px solid rgba(0,212,255,0.06); margin-bottom: 20px;">
                 <div style="font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 6px;">
-                    <img src="images/icon-info.png" alt="Info" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;" onerror="this.style.display='none'">
+                    <img src="/images/icon-info.png" alt="Info" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;" onerror="this.style.display='none'">
                     How to pay
                 </div>
                 <ol style="font-size: 13px; color: var(--text-secondary); padding-left: 20px; margin: 0; line-height: 2.2;">
@@ -426,7 +427,7 @@
             
             <!-- SUBMIT BUTTON -->
             <button id="paymentConfirmBtn" style="width: 100%; padding: 14px; border-radius: 14px; border: none; background: var(--gradient-main); color: var(--bg-primary); font-weight: 700; font-size: 16px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 8px;">
-                <img src="images/icon-confirm.png" alt="Confirm" class="btn-icon" onerror="this.style.display='none'">
+                <img src="/images/icon-confirm.png" alt="Confirm" class="btn-icon" onerror="this.style.display='none'">
                 I Sent the Payment
             </button>
             
@@ -437,7 +438,7 @@
     </div>
 
     <!-- ===== JAVASCRIPT ===== -->
-    <script type="module" src="js/app.js"></script>
+    <script type="module" src="/js/app.js"></script>
 
     <!-- ===== PAYMENT MODAL FUNCTIONS ===== -->
     <script>
