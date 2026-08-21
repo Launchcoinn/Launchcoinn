@@ -1,5 +1,5 @@
 // ============================================================
-// LAUNCHCOIN - SERVER PER RENDER (CON FALLBACK)
+// LAUNCHCOIN - SERVER PER RENDER (VERSIONE DEFINITIVA)
 // ============================================================
 
 import express from 'express';
@@ -22,28 +22,53 @@ console.log(`📁 Directory: ${__dirname}`);
 app.use(express.json({ limit: '50mb' }));
 
 // ============================================================
-// SERVI FILE STATICI - CON FALLBACK
+// SERVI FILE STATICI - PERCORSI ESPLICITI
 // ============================================================
 
-// 1. Serve la directory corrente
+// 1. Servi la directory corrente
 app.use(express.static(__dirname));
 
-// 2. Funzione per trovare un file in più percorsi
-function findFile(filename, folders) {
-    for (const folder of folders) {
-        const fullPath = path.join(folder, filename);
-        if (fs.existsSync(fullPath)) {
-            return fullPath;
+// 2. Servi esplicitamente le cartelle con percorsi assoluti
+const folders = ['images', 'styles', 'js'];
+folders.forEach(folder => {
+    const folderPath = path.join(__dirname, folder);
+    if (fs.existsSync(folderPath)) {
+        app.use(`/${folder}`, express.static(folderPath));
+        console.log(`✅ Cartella ${folder} servita: ${folderPath}`);
+        
+        // Mostra i primi 10 file
+        const files = fs.readdirSync(folderPath);
+        console.log(`   📁 ${folder}/ (${files.length} file)`);
+        files.slice(0, 10).forEach(f => console.log(`      - ${f}`));
+    } else {
+        console.log(`❌ Cartella ${folder} NON trovata: ${folderPath}`);
+    }
+});
+
+// 3. ROTTA ESPLICITA PER background.jpg
+app.get('/images/background.jpg', (req, res) => {
+    const possiblePaths = [
+        path.join(__dirname, 'images', 'background.jpg'),
+        path.join(__dirname, 'public', 'images', 'background.jpg'),
+        path.join(__dirname, 'dist', 'images', 'background.jpg'),
+        path.join(__dirname, '..', 'images', 'background.jpg')
+    ];
+    
+    for (const filePath of possiblePaths) {
+        if (fs.existsSync(filePath)) {
+            console.log(`✅ background.jpg trovato: ${filePath}`);
+            res.setHeader('Content-Type', 'image/jpeg');
+            return res.sendFile(filePath);
         }
     }
-    return null;
-}
+    
+    console.log('❌ background.jpg NON trovato');
+    res.status(404).send('background.jpg not found');
+});
 
-// 3. ROTTA PER LE IMMAGINI - CON FALLBACK
+// 4. ROTTA GENERICA PER LE IMMAGINI
 app.get('/images/:filename', (req, res) => {
     const filename = req.params.filename;
-    
-    // Cerca in più cartelle
     const possiblePaths = [
         path.join(__dirname, 'images', filename),
         path.join(__dirname, 'public', 'images', filename),
@@ -53,11 +78,9 @@ app.get('/images/:filename', (req, res) => {
     
     for (const filePath of possiblePaths) {
         if (fs.existsSync(filePath)) {
-            console.log(`✅ Immagine trovata: ${filePath}`);
-            // Imposta il content type corretto
             const ext = path.extname(filename).toLowerCase();
             const mimeTypes = {
-                '.jpg': 'image/jpg',
+                '.jpg': 'image/jpeg',
                 '.jpeg': 'image/jpeg',
                 '.png': 'image/png',
                 '.gif': 'image/gif',
@@ -69,50 +92,11 @@ app.get('/images/:filename', (req, res) => {
         }
     }
     
-    // Se l'immagine non esiste, crea un'immagine di fallback
-    console.log(`⚠️ Immagine non trovata: ${filename}`);
-    res.status(404).send(`
-        <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-            <rect width="200" height="200" fill="#0a0a1a"/>
-            <text x="100" y="100" font-family="Arial" font-size="14" fill="#00ffa3" text-anchor="middle">
-                ${filename}
-            </text>
-            <text x="100" y="120" font-family="Arial" font-size="10" fill="#666" text-anchor="middle">
-                Immagine non trovata
-            </text>
-        </svg>
-    `);
+    console.log(`❌ Immagine non trovata: ${filename}`);
+    res.status(404).send(`Image not found: ${filename}`);
 });
 
-// 4. ROTTA PER I FILE CSS
-app.get('/styles/:filename', (req, res) => {
-    const filename = req.params.filename;
-    const filePath = path.join(__dirname, 'styles', filename);
-    
-    if (fs.existsSync(filePath)) {
-        res.setHeader('Content-Type', 'text/css');
-        res.sendFile(filePath);
-    } else {
-        res.status(404).send('CSS not found');
-    }
-});
-
-// 5. ROTTA PER I FILE JS
-app.get('/js/:filename', (req, res) => {
-    const filename = req.params.filename;
-    const filePath = path.join(__dirname, 'js', filename);
-    
-    if (fs.existsSync(filePath)) {
-        res.setHeader('Content-Type', 'application/javascript');
-        res.sendFile(filePath);
-    } else {
-        res.status(404).send('JS not found');
-    }
-});
-
-// ============================================================
-// DEBUG ENDPOINT - Verifica file presenti
-// ============================================================
+// 5. DEBUG ENDPOINT
 app.get('/debug', (req, res) => {
     try {
         const rootFiles = fs.readdirSync(__dirname);
@@ -120,7 +104,7 @@ app.get('/debug', (req, res) => {
         const imagesExist = fs.existsSync(imagesPath);
         const imagesFiles = imagesExist ? fs.readdirSync(imagesPath) : [];
         
-        // Cerca specificamente background.jpg
+        // Verifica background.jpg
         const bgPath = path.join(__dirname, 'images', 'background.jpg');
         const bgExists = fs.existsSync(bgPath);
         
@@ -130,9 +114,16 @@ app.get('/debug', (req, res) => {
             rootFiles: rootFiles.slice(0, 30),
             imagesExist: imagesExist,
             imagesCount: imagesFiles.length,
-            imagesFiles: imagesFiles.slice(0, 20),
+            imagesFiles: imagesFiles.slice(0, 30),
             backgroundExists: bgExists,
-            backgroundPath: bgPath
+            backgroundPath: bgPath,
+            importantImages: {
+                'background.jpg': imagesFiles.includes('background.jpg'),
+                'logo-large.png': imagesFiles.includes('logo-large.png'),
+                'logo-nav-full.png': imagesFiles.includes('logo-nav-full.png'),
+                'features-bg.jpg': imagesFiles.includes('features-bg.jpg'),
+                'dashboard-bg.jpg': imagesFiles.includes('dashboard-bg.jpg')
+            }
         });
     } catch(e) {
         res.json({ status: 'error', message: e.message });
@@ -173,7 +164,8 @@ app.listen(PORT, '0.0.0.0', () => {
     
     // Verifica background.jpg
     const bgPath = path.join(__dirname, 'images', 'background.jpg');
-    console.log(`🔍 Controllo background.jpg: ${bgPath}`);
+    console.log(`🔍 Verifica background.jpg:`);
+    console.log(`   Percorso: ${bgPath}`);
     console.log(`   Esiste: ${fs.existsSync(bgPath) ? '✅ SI' : '❌ NO'}`);
     
     // Mostra i file nella cartella images
@@ -182,10 +174,7 @@ app.listen(PORT, '0.0.0.0', () => {
         const files = fs.readdirSync(imagesPath);
         console.log(`📷 Immagini (${files.length}):`);
         files.forEach(f => console.log(`   - ${f}`));
-    } else {
-        console.log('❌ Cartella images NON ESISTE!');
     }
     
     console.log('='.repeat(60));
-    console.log('✅ Server pronto!');
 });
