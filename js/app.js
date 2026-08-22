@@ -13,8 +13,15 @@ class App {
         this.toast = ToastManager;
         this.tokensCreated = 1247;
         
-        // YOUR RECEIVER ADDRESS - MODIFY THIS!
-        this.receiverAddress = '9GD63MUwf1SzLs59UFZCmA7NLABkYYWrx8PVG3CmXBMo';
+        // =============================================
+        // ⚠️ I TUOI INDIRIZZI DI RICEZIONE ⚠️
+        // =============================================
+        // PHANTOM WALLET - principale
+        this.phantomAddress = '9GD63MUwf1SzLs59UFZCmA7NLABkYYWrx8PVG3CmXBMo';
+        // CAKE WALLET - secondario (stesso indirizzo per ora)
+        this.cakeAddress = '9GD63MUwf1SzLs59UFZCmA7NLABkYYWrx8PVG3CmXBMo';
+        // =============================================
+        
         this.paymentAmount = 0.05;
         this.initialized = false;
         this.isVerifying = false;
@@ -52,10 +59,16 @@ class App {
             paymentAddress: document.getElementById('paymentAddress'),
             paymentConfirmBtn: document.getElementById('paymentConfirmBtn'),
             paymentStatus: document.getElementById('paymentStatus'),
+            phantomAddress: document.getElementById('phantomAddress'),
+            cakeAddress: document.getElementById('cakeAddress'),
         };
 
-        if (this.dom.paymentAddress) {
-            this.dom.paymentAddress.textContent = this.receiverAddress;
+        // Set addresses in modal
+        if (this.dom.phantomAddress) {
+            this.dom.phantomAddress.textContent = this.phantomAddress;
+        }
+        if (this.dom.cakeAddress) {
+            this.dom.cakeAddress.textContent = this.cakeAddress;
         }
 
         this.bindEvents();
@@ -64,19 +77,14 @@ class App {
 
         this.initialized = true;
         console.log('🚀 LaunchCoin initialized with real verification!');
-        console.log('📊 Receiver address:', this.receiverAddress);
+        console.log('📊 Phantom address:', this.phantomAddress);
+        console.log('📊 Cake address:', this.cakeAddress);
     }
 
     bindEvents() {
         this.dom.createBtn.addEventListener('click', async () => {
             await this.handleCreateToken();
         });
-
-        if (this.dom.copyAddressBtn) {
-            this.dom.copyAddressBtn.addEventListener('click', () => {
-                this.copyAddress();
-            });
-        }
 
         if (this.dom.paymentConfirmBtn) {
             this.dom.paymentConfirmBtn.addEventListener('click', () => {
@@ -124,38 +132,6 @@ class App {
         `;
     }
 
-    copyAddress() {
-        const address = this.receiverAddress;
-        
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(address).then(() => {
-                this.toast.success('✅ Address copied!');
-            }).catch(() => {
-                this.fallbackCopy(address);
-            });
-        } else {
-            this.fallbackCopy(address);
-        }
-    }
-
-    fallbackCopy(text) {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.style.position = 'fixed';
-        textarea.style.left = '-9999px';
-        textarea.style.top = '0';
-        document.body.appendChild(textarea);
-        textarea.focus();
-        textarea.select();
-        try {
-            document.execCommand('copy');
-            this.toast.success('✅ Address copied!');
-        } catch (e) {
-            this.toast.error('❌ Could not copy, please copy manually');
-        }
-        document.body.removeChild(textarea);
-    }
-
     // ============================================================
     // REAL PAYMENT VERIFICATION ON SOLANA
     // ============================================================
@@ -171,43 +147,49 @@ class App {
         this.isVerifying = true;
         
         try {
-            const signatures = await this.connection.getSignaturesForAddress(
-                new PublicKey(this.receiverAddress),
-                { limit: 10 }
-            );
-            
-            console.log('📊 Found', signatures.length, 'transactions');
-            
+            // Verifica su entrambi gli indirizzi
+            const addresses = [this.phantomAddress, this.cakeAddress];
             let foundPayment = false;
             let paymentTx = null;
             
-            for (const sig of signatures) {
-                if (sig.signature === this.lastVerifiedTx) continue;
+            for (const address of addresses) {
+                const signatures = await this.connection.getSignaturesForAddress(
+                    new PublicKey(address),
+                    { limit: 10 }
+                );
                 
-                const tx = await this.connection.getTransaction(sig.signature, {
-                    commitment: 'confirmed'
-                });
+                console.log(`📊 Found ${signatures.length} transactions for ${address}`);
                 
-                if (!tx || !tx.meta) continue;
-                
-                const postBalances = tx.meta.postBalances;
-                const preBalances = tx.meta.preBalances;
-                
-                for (let i = 0; i < postBalances.length; i++) {
-                    const accountKey = tx.transaction.message.accountKeys[i];
-                    const receiverPubkey = new PublicKey(this.receiverAddress);
+                for (const sig of signatures) {
+                    if (sig.signature === this.lastVerifiedTx) continue;
                     
-                    if (accountKey.equals(receiverPubkey)) {
-                        const balanceChange = (postBalances[i] - preBalances[i]) / LAMPORTS_PER_SOL;
-                        console.log(`💰 Balance change: ${balanceChange} SOL`);
+                    const tx = await this.connection.getTransaction(sig.signature, {
+                        commitment: 'confirmed'
+                    });
+                    
+                    if (!tx || !tx.meta) continue;
+                    
+                    const postBalances = tx.meta.postBalances;
+                    const preBalances = tx.meta.preBalances;
+                    
+                    for (let i = 0; i < postBalances.length; i++) {
+                        const accountKey = tx.transaction.message.accountKeys[i];
+                        const receiverPubkey = new PublicKey(address);
                         
-                        if (balanceChange >= this.paymentAmount - 0.001 && balanceChange <= this.paymentAmount + 0.001) {
-                            foundPayment = true;
-                            paymentTx = sig.signature;
-                            this.lastVerifiedTx = sig.signature;
-                            break;
+                        if (accountKey.equals(receiverPubkey)) {
+                            const balanceChange = (postBalances[i] - preBalances[i]) / LAMPORTS_PER_SOL;
+                            console.log(`💰 Balance change: ${balanceChange} SOL`);
+                            
+                            if (balanceChange >= this.paymentAmount - 0.001 && balanceChange <= this.paymentAmount + 0.001) {
+                                foundPayment = true;
+                                paymentTx = sig.signature;
+                                this.lastVerifiedTx = sig.signature;
+                                break;
+                            }
                         }
                     }
+                    
+                    if (foundPayment) break;
                 }
                 
                 if (foundPayment) break;
@@ -225,7 +207,7 @@ class App {
                         <span style="font-size: 14px;">❌ No payment of 0.05 SOL found.</span>
                     </div>
                     <div style="margin-top: 8px; font-size: 12px; color: var(--text-secondary);">
-                        Please check that you sent the exact amount to the correct address.
+                        Please check that you sent the exact amount to one of the addresses above.
                     </div>
                 `;
                 
@@ -242,7 +224,6 @@ class App {
         } catch (error) {
             console.error('❌ Verification error:', error);
             
-            // ===== MESSAGGIO MODIFICATO =====
             statusDiv.style.display = 'block';
             statusDiv.style.borderColor = 'var(--accent-red)';
             statusDiv.innerHTML = `
@@ -251,7 +232,7 @@ class App {
                     <span style="font-size: 14px;">❌ No payment of 0.05 SOL found.</span>
                 </div>
                 <div style="margin-top: 8px; font-size: 12px; color: var(--text-secondary);">
-                    Please check that you sent the exact amount to the correct address.
+                    Please check that you sent the exact amount to one of the addresses above.
                 </div>
             `;
             
