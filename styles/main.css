@@ -574,17 +574,17 @@ body {
 }
 
 /* ============================================================ */
-/* ===== UPLOAD AREA ===== */
+/* ===== UPLOAD AREA CON ICONA + ===== */
 /* ============================================================ */
 .upload-area {
     border: 2px dashed var(--border-color);
     border-radius: var(--radius);
-    padding: 20px;
+    padding: 16px;
     text-align: center;
     transition: var(--transition);
     cursor: pointer;
     background: rgba(255,255,255,0.02);
-    min-height: 100px;
+    min-height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -598,6 +598,19 @@ body {
 .upload-area.dragover {
     border-color: var(--accent-green);
     background: rgba(0, 255, 163, 0.08);
+}
+
+.upload-icon-plus {
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1;
+    transition: var(--transition);
+}
+
+.upload-area:hover .upload-icon-plus {
+    color: var(--accent-green);
+    transform: scale(1.1);
 }
 
 .upload-placeholder {
@@ -616,8 +629,8 @@ body {
 }
 
 .upload-preview img {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--accent-green);
@@ -627,13 +640,71 @@ body {
     background: none;
     border: none;
     color: var(--accent-red);
-    font-size: 12px;
+    font-size: 11px;
     cursor: pointer;
     transition: var(--transition);
 }
 
 #removeImage:hover {
     opacity: 0.7;
+}
+
+/* ============================================================ */
+/* ===== ACTION BUTTONS (Back + Create insieme) ===== */
+/* ============================================================ */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.action-buttons .back-btn {
+    flex: 0 0 auto;
+    padding: 14px 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.action-buttons .back-btn:hover {
+    background: rgba(255,255,255,0.08);
+    color: var(--text-primary);
+}
+
+.action-buttons .create-btn {
+    flex: 1;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    background: var(--gradient-main);
+    color: var(--bg-primary);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.action-buttons .create-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+.action-buttons .create-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
 }
 
 /* ============================================================ */
@@ -825,12 +896,12 @@ body {
     
     .upload-area {
         padding: 14px;
-        min-height: 80px;
+        min-height: 70px;
     }
     
     .upload-preview img {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
     }
     
     .step-btn {
@@ -895,14 +966,35 @@ body {
         max-height: 26px;
     }
     
+    .action-buttons {
+        flex-direction: row;
+        gap: 8px;
+    }
+    
+    .action-buttons .back-btn {
+        padding: 10px 14px;
+        font-size: 13px;
+        border-radius: 10px;
+    }
+    
+    .action-buttons .create-btn {
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+    
+    .upload-icon-plus {
+        font-size: 32px;
+    }
+    
     .upload-area {
         padding: 12px;
-        min-height: 70px;
+        min-height: 60px;
     }
     
     .upload-preview img {
-        width: 50px;
-        height: 50px;
+        width: 48px;
+        height: 48px;
     }
 }
 
@@ -1214,13 +1306,6 @@ body {
     opacity: 0.5;
 }
 
-@media (max-width: 480px) {
-    .btn-icon {
-        width: 16px;
-        height: 16px;
-    }
-}
-
 /* ===== WALLET ADDRESSES ===== */
 #paymentModal code {
     font-size: 12px;
@@ -1234,7 +1319,13 @@ body {
     object-fit: contain;
 }
 
+/* ===== RESPONSIVE ===== */
 @media (max-width: 480px) {
+    .btn-icon {
+        width: 16px;
+        height: 16px;
+    }
+    
     #paymentModal code {
         font-size: 10px;
     }
