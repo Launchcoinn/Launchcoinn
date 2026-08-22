@@ -71,7 +71,6 @@ body {
     text-decoration: none;
 }
 
-/* ===== LOGO NAVIGAZIONE SOLO IMMAGINE ===== */
 .nav-logo-full {
     max-height: 40px;
     width: auto;
@@ -196,7 +195,6 @@ body {
     z-index: 1;
 }
 
-/* ===== LOGO GRANDE - DIMENSIONI NORMALI (NON SCHIACCIATO) ===== */
 .hero-logo-container {
     text-align: center;
     margin-bottom: 10px;
@@ -576,6 +574,108 @@ body {
 }
 
 /* ============================================================ */
+/* ===== UPLOAD AREA ===== */
+/* ============================================================ */
+.upload-area {
+    border: 2px dashed var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+    background: rgba(255,255,255,0.02);
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-area:hover {
+    border-color: var(--accent-green);
+    background: rgba(0, 255, 163, 0.03);
+}
+
+.upload-area.dragover {
+    border-color: var(--accent-green);
+    background: rgba(0, 255, 163, 0.08);
+}
+
+.upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.upload-preview img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-green);
+}
+
+#removeImage {
+    background: none;
+    border: none;
+    color: var(--accent-red);
+    font-size: 12px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#removeImage:hover {
+    opacity: 0.7;
+}
+
+/* ============================================================ */
+/* ===== FORM STEPS ===== */
+/* ============================================================ */
+.form-step {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.step-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.next-btn {
+    background: var(--gradient-main);
+    color: var(--bg-primary);
+    margin-top: 8px;
+}
+
+.next-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+.back-btn:hover {
+    background: rgba(255,255,255,0.08);
+    color: var(--text-primary);
+}
+
+/* ============================================================ */
 /* ===== PAYMENT MODAL - MOBILE FRIENDLY ===== */
 /* ============================================================ */
 #paymentModal {
@@ -722,6 +822,21 @@ body {
         max-width: 70px !important;
         max-height: 70px !important;
     }
+    
+    .upload-area {
+        padding: 14px;
+        min-height: 80px;
+    }
+    
+    .upload-preview img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .step-btn {
+        padding: 12px;
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -779,6 +894,16 @@ body {
     .nav-logo-full {
         max-height: 26px;
     }
+    
+    .upload-area {
+        padding: 12px;
+        min-height: 70px;
+    }
+    
+    .upload-preview img {
+        width: 50px;
+        height: 50px;
+    }
 }
 
 @media (max-width: 380px) {
@@ -818,7 +943,6 @@ body {
     margin-bottom: 16px;
 }
 
-/* ===== MEMECOIN TITLE CON TESTO + IMMAGINE ===== */
 .memecoin-title {
     display: flex;
     align-items: center;
@@ -1077,23 +1201,19 @@ body {
     filter: drop-shadow(0 0 4px rgba(0, 255, 163, 0.15));
 }
 
-/* Per il pulsante Create Token */
 .create-btn .btn-icon {
     margin-right: 6px;
 }
 
-/* Per il pulsante Confirm Payment */
 #paymentConfirmBtn .btn-icon {
     margin-right: 6px;
 }
 
-/* Quando il pulsante è disabilitato o in caricamento */
 .create-btn:disabled .btn-icon,
 #paymentConfirmBtn:disabled .btn-icon {
     opacity: 0.5;
 }
 
-/* ===== RESPONSIVE ICONE PULSANTI ===== */
 @media (max-width: 480px) {
     .btn-icon {
         width: 16px;
@@ -1114,7 +1234,6 @@ body {
     object-fit: contain;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 480px) {
     #paymentModal code {
         font-size: 10px;
