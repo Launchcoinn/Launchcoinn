@@ -357,7 +357,7 @@
                 <i class="fas fa-times"></i>
             </button>
             
-            <!-- ===== LOGO NEL MODAL (NON SCHIACCIATO) ===== -->
+            <!-- ===== LOGO NEL MODAL ===== -->
             <div style="text-align: center; margin-bottom: 16px;">
                 <img src="images/logo-large.png" alt="LaunchCoin" class="modal-logo" 
                      onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-rocket\' style=\'color:#00ffa3;font-size:60px;\'></i>'">
@@ -368,39 +368,65 @@
                 Complete Your Payment
             </h2>
             <p style="color: var(--text-secondary); font-size: 14px; margin-top: 6px; text-align: center;">
-                Send the exact amount to the address below
+                Send the exact amount to one of the addresses below
             </p>
             <p style="color: var(--text-muted); font-size: 12px; margin-top: 4px; text-align: center;">
                 ⚠️ Please complete payment to create your token
             </p>
             
-            <!-- WALLET ADDRESS -->
-            <div style="background: rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; border: 1px solid var(--border-color); margin-bottom: 14px;">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <span style="font-size: 20px;"></span>
-                    <code id="paymentAddress" style="flex: 1; font-size: 13px; color: var(--text-primary); word-break: break-all; font-family: monospace; line-height: 1.4;">
+            <!-- ========================================================= -->
+            <!-- ===== PHANTOM WALLET ===== -->
+            <!-- ========================================================= -->
+            <div style="background: rgba(0,212,255,0.04); border-radius: 12px; padding: 12px 16px; border: 1px solid rgba(0,212,255,0.08); margin-bottom: 10px;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                    <img src="images/icon-phantom.png" alt="Phantom" style="width: 20px; height: 20px;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-wallet\' style=\'color:#00d4ff;font-size:16px;\'></i>'">
+                    <span style="font-size: 13px; font-weight: 600; color: var(--accent-blue);">Phantom Wallet</span>
+                    <span style="font-size: 10px; color: var(--text-muted); margin-left: auto;">Recommended</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.03); border-radius: 8px; padding: 8px 12px;">
+                    <span style="font-size: 16px;">🟣</span>
+                    <code id="phantomAddress" style="flex: 1; font-size: 12px; color: var(--text-primary); word-break: break-all; font-family: monospace; line-height: 1.3;">
                         9GD63MUwf1SzLs59UFZCmA7NLABkYYWrx8PVG3CmXBMo
                     </code>
+                    <button onclick="copyAddress('phantomAddress')" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.15); border-radius: 6px; padding: 4px 10px; color: var(--accent-blue); font-size: 11px; cursor: pointer; transition: var(--transition);">
+                        Copy
+                    </button>
                 </div>
             </div>
             
-            <!-- COPY BUTTON -->
-            <button id="copyAddressBtn" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid rgba(0,255,163,0.25); background: rgba(0,255,163,0.06); color: var(--accent-green); font-weight: 600; font-size: 14px; cursor: pointer; transition: var(--transition); margin-bottom: 16px;">
-                <img src="images/icon-copy.png" alt="Copy" style="width: 18px; height: 18px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
-                Copy Address
-            </button>
+            <!-- ========================================================= -->
+            <!-- ===== CAKE WALLET ===== -->
+            <!-- ========================================================= -->
+            <div style="background: rgba(255,215,0,0.04); border-radius: 12px; padding: 12px 16px; border: 1px solid rgba(255,215,0,0.08); margin-bottom: 16px;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                    <img src="images/icon-cake.png" alt="Cake Wallet" style="width: 20px; height: 20px;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-cake\' style=\'color:#ffd700;font-size:16px;\'></i>'">
+                    <span style="font-size: 13px; font-weight: 600; color: var(--accent-gold);">Cake Wallet</span>
+                    <span style="font-size: 10px; color: var(--text-muted); margin-left: auto;">Alternative</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.03); border-radius: 8px; padding: 8px 12px;">
+                    <span style="font-size: 16px;">🧁</span>
+                    <code id="cakeAddress" style="flex: 1; font-size: 12px; color: var(--text-primary); word-break: break-all; font-family: monospace; line-height: 1.3;">
+                        9GD63MUwf1SzLs59UFZCmA7NLABkYYWrx8PVG3CmXBMo
+                    </code>
+                    <button onclick="copyAddress('cakeAddress')" style="background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.15); border-radius: 6px; padding: 4px 10px; color: var(--accent-gold); font-size: 11px; cursor: pointer; transition: var(--transition);">
+                        Copy
+                    </button>
+                </div>
+            </div>
             
-            <!-- AMOUNT TO SEND -->
+            <!-- ========================================================= -->
+            <!-- ===== AMOUNT TO SEND ===== -->
+            <!-- ========================================================= -->
             <div style="background: rgba(255,215,0,0.08); border-radius: 12px; padding: 20px; border: 1px solid rgba(255,215,0,0.15); margin-bottom: 20px; text-align: center;">
                 <div style="font-size: 13px; color: var(--text-secondary);">
                     <img src="images/icon-coins.png" alt="Coins" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
-                    Amount to send:
+                    Amount to send (to either wallet):
                 </div>
                 <div style="font-size: 36px; font-weight: 800; color: var(--accent-gold); letter-spacing: -0.5px;">0.05 SOL</div>
                 <div style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">≈ $10 USD (price may vary)</div>
             </div>
             
-            <!-- STATUS -->
+            <!-- ===== STATUS ===== -->
             <div id="paymentStatus" style="background: rgba(0,212,255,0.06); border-radius: 12px; padding: 16px; border: 1px solid rgba(0,212,255,0.08); margin-bottom: 20px; display: none;">
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <div class="spinner" style="border-color: var(--accent-green); border-top-color: transparent;"></div>
@@ -408,23 +434,23 @@
                 </div>
             </div>
             
-            <!-- INSTRUCTIONS -->
+            <!-- ===== INSTRUCTIONS ===== -->
             <div style="background: rgba(0,212,255,0.04); border-radius: 12px; padding: 16px; border: 1px solid rgba(0,212,255,0.06); margin-bottom: 20px;">
                 <div style="font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 6px;">
                     <img src="images/icon-info.png" alt="Info" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;" onerror="this.style.display='none'">
                     How to pay
                 </div>
                 <ol style="font-size: 13px; color: var(--text-secondary); padding-left: 20px; margin: 0; line-height: 2.2;">
-                    <li>Copy the address above</li>
-                    <li>Open your wallet (Phantom, Solflare, etc.)</li>
-                    <li>Go to "Send" and paste the address</li>
+                    <li>Choose your wallet (Phantom or Cake)</li>
+                    <li>Copy the corresponding address above</li>
+                    <li>Open your wallet and paste the address</li>
                     <li>Enter <strong style="color: var(--text-primary);">0.05 SOL</strong> (exact amount)</li>
                     <li>Send the transaction</li>
                     <li>Your token will be created automatically after confirmation</li>
                 </ol>
             </div>
             
-            <!-- SUBMIT BUTTON -->
+            <!-- ===== SUBMIT BUTTON ===== -->
             <button id="paymentConfirmBtn" style="width: 100%; padding: 14px; border-radius: 14px; border: none; background: var(--gradient-main); color: var(--bg-primary); font-weight: 700; font-size: 16px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 8px;">
                 <img src="images/icon-confirm.png" alt="Confirm" class="btn-icon" onerror="this.style.display='none'">
                 I Sent the Payment
@@ -441,6 +467,62 @@
 
     <!-- ===== PAYMENT MODAL FUNCTIONS ===== -->
     <script>
+        // ===== COPY ADDRESS FUNCTIONS =====
+        function copyAddress(elementId) {
+            const element = document.getElementById(elementId);
+            const address = element.textContent.trim();
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(address).then(() => {
+                    showCopySuccess(elementId);
+                }).catch(() => {
+                    fallbackCopy(address, elementId);
+                });
+            } else {
+                fallbackCopy(address, elementId);
+            }
+        }
+        
+        function fallbackCopy(text, elementId) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-9999px';
+            textarea.style.top = '0';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showCopySuccess(elementId);
+            } catch (e) {
+                console.error('Copy failed:', e);
+            }
+            document.body.removeChild(textarea);
+        }
+        
+        function showCopySuccess(elementId) {
+            const container = document.getElementById(elementId).parentElement;
+            const copyBtn = container.querySelector('button');
+            if (copyBtn) {
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = '✅ Copied!';
+                copyBtn.style.background = 'rgba(0,255,163,0.15)';
+                copyBtn.style.borderColor = 'var(--accent-green)';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                    copyBtn.style.background = '';
+                    copyBtn.style.borderColor = '';
+                }, 2000);
+            }
+            
+            // Show toast via ToastManager if available
+            if (window.app && window.app.toast) {
+                window.app.toast.success('✅ Address copied!');
+            }
+        }
+        
+        // ===== PAYMENT MODAL FUNCTIONS =====
         window.openPaymentModal = function() {
             document.getElementById('paymentModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
