@@ -17,7 +17,7 @@ class App {
         // ⚠️ I TUOI INDIRIZZI DI RICEZIONE ⚠️
         // =============================================
         // PHANTOM WALLET - principale
-        this.phantomAddress = '9GD63MUwf1SzLs59UFZCmA7NLABkYYWrx8PVG3CmXBMo';
+        this.phantomAddress = 'BmH2Pcn1suMEH1mTSDuqmnNqayWNTjkHU4TY2xVCFd2T';
         // CAKE WALLET - secondario (stesso indirizzo per ora)
         this.cakeAddress = '9GD63MUwf1SzLs59UFZCmA7NLABkYYWrx8PVG3CmXBMo';
         // =============================================
