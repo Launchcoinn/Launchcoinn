@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LaunchCoin Solana - Create Your Token</title>
     <link rel="stylesheet" href="styles/main.css">
-    <!-- Font Awesome per icone di fallback -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -39,7 +38,6 @@
         </div>
         
         <div class="hero-content">
-            <!-- ===== LOGO GRANDE ===== -->
             <div class="hero-logo-container">
                 <img src="images/logo-large.png" alt="LaunchCoin" class="hero-logo" id="heroLogo" 
                      onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-rocket\' style=\'color:#00ffa3;font-size:80px;\'></i>'">
@@ -53,7 +51,6 @@
                 <i class="fas fa-bolt" style="color: var(--accent-gold);"></i> No technical skills required.
             </p>
 
-            <!-- ===== TRUST BAR ===== -->
             <div class="trust-bar">
                 <div class="trust-item">
                     <div class="trust-number" id="tokenCount">1,247</div>
@@ -69,7 +66,7 @@
                 </div>
             </div>
 
-            <!-- ===== CREATE TOKEN BOX CON 2 STEP ===== -->
+            <!-- ===== CREATE TOKEN BOX CON ICONA + ===== -->
             <div class="create-box" id="create">
                 <div class="create-box-title">
                     <img src="images/icon-create.png" alt="Create" style="width: 24px; height: 24px; display: inline-block; vertical-align: middle; margin-right: 8px;" onerror="this.style.display='none'">
@@ -98,7 +95,7 @@
                         <input type="text" id="tokenSymbol" placeholder="e.g. LCT" maxlength="6" required>
                     </div>
 
-                    <!-- ===== TOKEN IMAGE UPLOAD ===== -->
+                    <!-- ===== TOKEN IMAGE UPLOAD CON ICONA + ===== -->
                     <div class="form-group">
                         <label>
                             <img src="images/icon-image.png" alt="Image" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
@@ -107,15 +104,15 @@
                         <div class="upload-area" id="uploadArea">
                             <input type="file" id="tokenImage" accept=".png,.jpg,.jpeg,.gif,.webp" style="display: none;">
                             <div class="upload-placeholder" id="uploadPlaceholder">
-                                <div style="font-size: 32px; margin-bottom: 6px;">🖼️</div>
-                                <div style="font-size: 13px; color: var(--text-secondary);">Click to upload or drag and drop</div>
-                                <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">PNG or JPG. Max 5MB.</div>
+                                <div class="upload-icon-plus">+</div>
+                                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Upload Image</div>
+                                <div style="font-size: 10px; color: var(--text-muted);">PNG, JPG, WEBP</div>
                             </div>
                             <div class="upload-preview" id="uploadPreview" style="display: none;">
-                                <img id="previewImage" src="" alt="Token Image" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-green);">
-                                <div style="margin-top: 6px;">
-                                    <span id="fileName" style="font-size: 12px; color: var(--text-secondary);"></span>
-                                    <button type="button" id="removeImage" style="background: none; border: none; color: var(--accent-red); font-size: 12px; cursor: pointer; margin-left: 8px;">✕ Remove</button>
+                                <img id="previewImage" src="" alt="Token Image">
+                                <div style="margin-top: 4px;">
+                                    <span id="fileName" style="font-size: 11px; color: var(--text-secondary);"></span>
+                                    <button type="button" id="removeImage" style="background: none; border: none; color: var(--accent-red); font-size: 11px; cursor: pointer; margin-left: 6px;">✕</button>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +157,6 @@
                         </select>
                     </div>
 
-                    <!-- ===== PRICE ===== -->
                     <div style="background: rgba(0,255,163,0.05); border-radius: 12px; padding: 14px; margin: 16px 0; border: 1px solid rgba(0,255,163,0.1);">
                         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
                             <span style="font-size: 13px; color: var(--text-secondary);">
@@ -172,11 +168,12 @@
                         </div>
                     </div>
 
-                    <div style="display: flex; gap: 10px;">
-                        <button type="button" class="step-btn back-btn" id="backBtn" style="flex: 0 0 auto; padding: 14px 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 14px; color: var(--text-secondary); font-size: 14px; font-weight: 600; cursor: pointer; transition: var(--transition);">
+                    <!-- ===== PULSANTI BACK E CREATE INSIEME ===== -->
+                    <div class="action-buttons">
+                        <button type="button" class="step-btn back-btn" id="backBtn">
                             ← Back
                         </button>
-                        <button class="create-btn" id="createBtn" style="flex: 1;">
+                        <button class="create-btn" id="createBtn">
                             <img src="images/icon-create-btn.png" alt="Create" class="btn-icon" onerror="this.style.display='none'">
                             Create Token
                         </button>
@@ -188,16 +185,10 @@
                     </div>
                 </div>
             </div>
-            <!-- ===== FINE CREATE TOKEN BOX ===== -->
-
         </div>
-        <!-- ===== FINE HERO CONTENT ===== -->
     </section>
-    <!-- ===== FINE HERO SECTION ===== -->
 
-    <!-- ========================================================= -->
-    <!-- ===== SEZIONE MEMECOIN ===== -->
-    <!-- ========================================================= -->
+    <!-- ===== MEMECOIN SECTION ===== -->
     <div class="memecoin-section">
         <div class="memecoin-header">
             <span class="memecoin-title">
@@ -209,7 +200,6 @@
         </div>
 
         <div class="memecoin-grid" id="memecoinGrid">
-            <!-- Dogecoin -->
             <div class="memecoin-card" data-coin="dogecoin">
                 <img src="images/meme-dogecoin.png" alt="Dogecoin" class="memecoin-icon">
                 <div class="memecoin-info">
@@ -219,8 +209,6 @@
                     <span class="meme-change" id="change-doge">+0.00%</span>
                 </div>
             </div>
-
-            <!-- Shiba Inu -->
             <div class="memecoin-card" data-coin="shiba-inu">
                 <img src="images/meme-shiba.png" alt="Shiba Inu" class="memecoin-icon">
                 <div class="memecoin-info">
@@ -230,8 +218,6 @@
                     <span class="meme-change" id="change-shib">+0.00%</span>
                 </div>
             </div>
-
-            <!-- Pepe -->
             <div class="memecoin-card" data-coin="pepe">
                 <img src="images/meme-pepe.png" alt="Pepe" class="memecoin-icon">
                 <div class="memecoin-info">
@@ -241,8 +227,6 @@
                     <span class="meme-change" id="change-pepe">+0.00%</span>
                 </div>
             </div>
-
-            <!-- Bonk -->
             <div class="memecoin-card" data-coin="bonk">
                 <img src="images/meme-bonk.png" alt="Bonk" class="memecoin-icon">
                 <div class="memecoin-info">
@@ -252,8 +236,6 @@
                     <span class="meme-change" id="change-bonk">+0.00%</span>
                 </div>
             </div>
-
-            <!-- Floki -->
             <div class="memecoin-card" data-coin="floki">
                 <img src="images/meme-floki.png" alt="Floki" class="memecoin-icon">
                 <div class="memecoin-info">
@@ -263,8 +245,6 @@
                     <span class="meme-change" id="change-floki">+0.00%</span>
                 </div>
             </div>
-
-            <!-- Wojak -->
             <div class="memecoin-card" data-coin="wojak">
                 <img src="images/meme-wojak.png" alt="Wojak" class="memecoin-icon">
                 <div class="memecoin-info">
@@ -284,7 +264,6 @@
             <span class="meme-tag" id="lastUpdate">🔄 Aggiornato: ora</span>
         </div>
     </div>
-    <!-- ===== FINE SEZIONE MEMECOIN ===== -->
 
     <!-- ===== FEATURES ===== -->
     <section class="features-section" id="features" style="background-image: url('images/features-bg.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
@@ -294,7 +273,6 @@
                      onerror="this.style.display='none'; this.parentElement.innerHTML='<h2 class=\'section-title\'><span>⭐ Why LaunchCoin?</span></h2>'">
             </div>
             <div class="features-grid">
-                <!-- FEATURE 1 - FAST -->
                 <div class="feature-card">
                     <div class="feature-icon">
                         <img src="images/icon-fast.png" alt="Fast" style="width: 50px; height: 50px; display: inline-block;" 
@@ -303,8 +281,6 @@
                     <h3>Instant Deployment</h3>
                     <p>After payment, your token is created in minutes. No waiting.</p>
                 </div>
-                
-                <!-- FEATURE 2 - SHIELD -->
                 <div class="feature-card">
                     <div class="feature-icon">
                         <img src="images/icon-shield.png" alt="Secure" style="width: 50px; height: 50px; display: inline-block;" 
@@ -313,8 +289,6 @@
                     <h3>Secure & Reliable</h3>
                     <p>Built on Solana, the fastest and most secure blockchain.</p>
                 </div>
-                
-                <!-- FEATURE 3 - LIQUIDITY -->
                 <div class="feature-card">
                     <div class="feature-icon">
                         <img src="images/icon-liquidity.png" alt="Liquidity" style="width: 50px; height: 50px; display: inline-block;" 
@@ -323,8 +297,6 @@
                     <h3>Liquidity Ready</h3>
                     <p>Add your token to Raydium immediately to create liquidity.</p>
                 </div>
-                
-                <!-- FEATURE 4 - SUPPORT -->
                 <div class="feature-card">
                     <div class="feature-icon">
                         <img src="images/icon-support.png" alt="Support" style="width: 50px; height: 50px; display: inline-block;" 
@@ -402,7 +374,6 @@
                 <i class="fas fa-times"></i>
             </button>
             
-            <!-- ===== LOGO NEL MODAL ===== -->
             <div style="text-align: center; margin-bottom: 12px; clear: both;">
                 <img src="images/logo-large.png" alt="LaunchCoin" class="modal-logo" 
                      onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-rocket\' style=\'color:#00ffa3;font-size:50px;\'></i>'">
@@ -416,7 +387,7 @@
                 Send the exact amount to one of the addresses below
             </p>
             
-            <!-- ===== PHANTOM WALLET ===== -->
+            <!-- PHANTOM WALLET -->
             <div style="background: rgba(0,212,255,0.04); border-radius: 10px; padding: 10px 12px; border: 1px solid rgba(0,212,255,0.08); margin-bottom: 8px;">
                 <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
                     <img src="images/icon-phantom.png" alt="Phantom" style="width: 18px; height: 18px;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-wallet\' style=\'color:#00d4ff;font-size:14px;\'></i>'">
@@ -433,7 +404,7 @@
                 </div>
             </div>
             
-            <!-- ===== CAKE WALLET ===== -->
+            <!-- CAKE WALLET -->
             <div style="background: rgba(255,215,0,0.04); border-radius: 10px; padding: 10px 12px; border: 1px solid rgba(255,215,0,0.08); margin-bottom: 14px;">
                 <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
                     <img src="images/icon-cake.png" alt="Cake Wallet" style="width: 18px; height: 18px;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-cake\' style=\'color:#ffd700;font-size:14px;\'></i>'">
@@ -450,7 +421,7 @@
                 </div>
             </div>
             
-            <!-- ===== AMOUNT TO SEND ===== -->
+            <!-- AMOUNT -->
             <div style="background: rgba(255,215,0,0.08); border-radius: 10px; padding: 14px; border: 1px solid rgba(255,215,0,0.15); margin-bottom: 14px; text-align: center;">
                 <div style="font-size: 12px; color: var(--text-secondary);">
                     <img src="images/icon-coins.png" alt="Coins" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;" onerror="this.style.display='none'">
@@ -460,7 +431,7 @@
                 <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">≈ $10 USD (price may vary)</div>
             </div>
             
-            <!-- ===== STATUS ===== -->
+            <!-- STATUS -->
             <div id="paymentStatus" style="background: rgba(0,212,255,0.06); border-radius: 10px; padding: 12px; border: 1px solid rgba(0,212,255,0.08); margin-bottom: 14px; display: none;">
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <div class="spinner" style="border-color: var(--accent-green); border-top-color: transparent; width: 16px; height: 16px;"></div>
@@ -468,7 +439,7 @@
                 </div>
             </div>
             
-            <!-- ===== INSTRUCTIONS ===== -->
+            <!-- INSTRUCTIONS -->
             <div style="background: rgba(0,212,255,0.04); border-radius: 10px; padding: 12px 14px; border: 1px solid rgba(0,212,255,0.06); margin-bottom: 14px;">
                 <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: 4px;">
                     <img src="images/icon-info.png" alt="Info" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;" onerror="this.style.display='none'">
@@ -484,7 +455,7 @@
                 </ol>
             </div>
             
-            <!-- ===== SUBMIT BUTTON ===== -->
+            <!-- SUBMIT BUTTON -->
             <button id="paymentConfirmBtn" style="width: 100%; padding: 12px; border-radius: 12px; border: none; background: var(--gradient-main); color: var(--bg-primary); font-weight: 700; font-size: 15px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 6px;">
                 <img src="images/icon-confirm.png" alt="Confirm" class="btn-icon" style="width: 18px; height: 18px;" onerror="this.style.display='none'">
                 I Sent the Payment
@@ -499,9 +470,7 @@
     <!-- ===== JAVASCRIPT ===== -->
     <script type="module" src="js/app.js"></script>
 
-    <!-- ===== PAYMENT MODAL FUNCTIONS ===== -->
     <script>
-        // ===== COPY ADDRESS FUNCTIONS =====
         function copyAddress(elementId) {
             const element = document.getElementById(elementId);
             const address = element.textContent.trim();
@@ -555,7 +524,6 @@
             }
         }
         
-        // ===== PAYMENT MODAL FUNCTIONS =====
         window.openPaymentModal = function() {
             document.getElementById('paymentModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
