@@ -490,4 +490,98 @@
                 I Sent the Payment
             </button>
             
-            <div style="text-align:
+            <div style="text-align: center; margin-top: 10px; font-size: 11px; color: var(--text-muted);">
+                ⏱️ Wait 1-2 minutes for token creation
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script type="module" src="js/app.js"></script>
+
+    <!-- ===== PAYMENT MODAL FUNCTIONS ===== -->
+    <script>
+        // ===== COPY ADDRESS FUNCTIONS =====
+        function copyAddress(elementId) {
+            const element = document.getElementById(elementId);
+            const address = element.textContent.trim();
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(address).then(() => {
+                    showCopySuccess(elementId);
+                }).catch(() => {
+                    fallbackCopy(address, elementId);
+                });
+            } else {
+                fallbackCopy(address, elementId);
+            }
+        }
+        
+        function fallbackCopy(text, elementId) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-9999px';
+            textarea.style.top = '0';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showCopySuccess(elementId);
+            } catch (e) {
+                console.error('Copy failed:', e);
+            }
+            document.body.removeChild(textarea);
+        }
+        
+        function showCopySuccess(elementId) {
+            const container = document.getElementById(elementId).parentElement;
+            const copyBtn = container.querySelector('button');
+            if (copyBtn) {
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = '✅ Copied!';
+                copyBtn.style.background = 'rgba(0,255,163,0.15)';
+                copyBtn.style.borderColor = 'var(--accent-green)';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                    copyBtn.style.background = '';
+                    copyBtn.style.borderColor = '';
+                }, 2000);
+            }
+            
+            if (window.app && window.app.toast) {
+                window.app.toast.success('✅ Address copied!');
+            }
+        }
+        
+        // ===== PAYMENT MODAL FUNCTIONS =====
+        window.openPaymentModal = function() {
+            document.getElementById('paymentModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        };
+        
+        window.closePaymentModal = function() {
+            document.getElementById('paymentModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        };
+        
+        document.getElementById('paymentModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                alert('⚠️ Please complete the payment to create your token.\n\nIf you already sent the payment, click "I Sent the Payment" to verify.');
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('paymentModal');
+                if (modal.style.display === 'flex') {
+                    e.preventDefault();
+                    alert('⚠️ Please complete the payment to create your token.\n\nIf you already sent the payment, click "I Sent the Payment" to verify.');
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
