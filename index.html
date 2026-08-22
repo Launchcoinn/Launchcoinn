@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <!-- ===== NAVIGATION (SOLO IMMAGINE, SENZA TESTO) ===== -->
+    <!-- ===== NAVIGATION ===== -->
     <nav class="nav-container" id="navbar">
         <a href="#" class="logo-container">
             <img src="images/logo-nav-full.png" alt="LaunchCoin Solana" class="nav-logo-full" 
@@ -39,7 +39,7 @@
         </div>
         
         <div class="hero-content">
-            <!-- ===== LOGO GRANDE - NON SCHIACCIATO ===== -->
+            <!-- ===== LOGO GRANDE ===== -->
             <div class="hero-logo-container">
                 <img src="images/logo-large.png" alt="LaunchCoin" class="hero-logo" id="heroLogo" 
                      onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-rocket\' style=\'color:#00ffa3;font-size:80px;\'></i>'">
@@ -69,78 +69,123 @@
                 </div>
             </div>
 
-            <!-- ===== CREATE TOKEN BOX ===== -->
+            <!-- ===== CREATE TOKEN BOX CON 2 STEP ===== -->
             <div class="create-box" id="create">
                 <div class="create-box-title">
                     <img src="images/icon-create.png" alt="Create" style="width: 24px; height: 24px; display: inline-block; vertical-align: middle; margin-right: 8px;" onerror="this.style.display='none'">
                     <span>Create Your Token</span>
                 </div>
 
-                <div class="form-group">
-                    <label>
-                        <img src="images/icon-name.png" alt="Name" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
-                        Token Name
-                    </label>
-                    <input type="text" id="tokenName" placeholder="e.g. My Awesome Token" required>
-                </div>
+                <!-- ===== STEP 1 ===== -->
+                <div id="step1" class="form-step">
+                    <div style="background: rgba(0,255,163,0.05); border-radius: 8px; padding: 6px 12px; margin-bottom: 14px; text-align: center; font-size: 12px; color: var(--text-secondary);">
+                        Step 1 of 2 — Token Details
+                    </div>
 
-                <div class="form-group">
-                    <label>
-                        <img src="images/icon-symbol.png" alt="Symbol" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
-                        Symbol (max 6 chars)
-                    </label>
-                    <input type="text" id="tokenSymbol" placeholder="e.g. LCT" maxlength="6" required>
-                </div>
-
-                <div class="form-row">
                     <div class="form-group">
                         <label>
-                            <img src="images/icon-decimals.png" alt="Decimals" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
-                            Decimals
+                            <img src="images/icon-name.png" alt="Name" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                            Token Name
                         </label>
-                        <input type="number" id="tokenDecimals" value="9" min="0" max="9">
+                        <input type="text" id="tokenName" placeholder="e.g. My Awesome Token" required>
                     </div>
+
                     <div class="form-group">
                         <label>
-                            <img src="images/icon-supply.png" alt="Supply" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
-                            Initial Supply
+                            <img src="images/icon-symbol.png" alt="Symbol" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                            Symbol (max 6 chars)
                         </label>
-                        <input type="number" id="tokenSupply" value="1000000" min="1">
+                        <input type="text" id="tokenSymbol" placeholder="e.g. LCT" maxlength="6" required>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label>
-                        <img src="images/icon-network.png" alt="Network" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
-                        Network
-                    </label>
-                    <select id="networkSelect">
-                        <option value="mainnet-beta">Mainnet (production)</option>
-                        <option value="devnet" selected>Devnet (test)</option>
-                    </select>
-                </div>
-
-                <!-- ===== PRICE ===== -->
-                <div style="background: rgba(0,255,163,0.05); border-radius: 12px; padding: 14px; margin: 16px 0; border: 1px solid rgba(0,255,163,0.1);">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-                        <span style="font-size: 13px; color: var(--text-secondary);">
-                            <img src="images/icon-gem.png" alt="Gem" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;" onerror="this.style.display='none'">
-                            Creation fee:
-                        </span>
-                        <span style="font-size: 18px; font-weight: 700; color: var(--accent-green);">0.05 SOL</span>
-                        <span style="font-size: 12px; color: var(--text-muted);">≈ $10 USD</span>
+                    <!-- ===== TOKEN IMAGE UPLOAD ===== -->
+                    <div class="form-group">
+                        <label>
+                            <img src="images/icon-image.png" alt="Image" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                            Token Image
+                        </label>
+                        <div class="upload-area" id="uploadArea">
+                            <input type="file" id="tokenImage" accept=".png,.jpg,.jpeg,.gif,.webp" style="display: none;">
+                            <div class="upload-placeholder" id="uploadPlaceholder">
+                                <div style="font-size: 32px; margin-bottom: 6px;">🖼️</div>
+                                <div style="font-size: 13px; color: var(--text-secondary);">Click to upload or drag and drop</div>
+                                <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">PNG or JPG. Max 5MB.</div>
+                            </div>
+                            <div class="upload-preview" id="uploadPreview" style="display: none;">
+                                <img id="previewImage" src="" alt="Token Image" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-green);">
+                                <div style="margin-top: 6px;">
+                                    <span id="fileName" style="font-size: 12px; color: var(--text-secondary);"></span>
+                                    <button type="button" id="removeImage" style="background: none; border: none; color: var(--accent-red); font-size: 12px; cursor: pointer; margin-left: 8px;">✕ Remove</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <button type="button" class="step-btn next-btn" id="nextBtn">
+                        Next →
+                    </button>
                 </div>
 
-                <!-- ===== PULSANTE CREATE TOKEN ===== -->
-                <button class="create-btn" id="createBtn">
-                    <img src="images/icon-create-btn.png" alt="Create" class="btn-icon" onerror="this.style.display='none'">
-                    Create Token
-                </button>
+                <!-- ===== STEP 2 ===== -->
+                <div id="step2" class="form-step" style="display: none;">
+                    <div style="background: rgba(0,255,163,0.05); border-radius: 8px; padding: 6px 12px; margin-bottom: 14px; text-align: center; font-size: 12px; color: var(--text-secondary);">
+                        Step 2 of 2 — Token Supply & Network
+                    </div>
 
-                <div style="margin-top: 12px; font-size: 12px; color: var(--text-muted); text-align: center;">
-                    <img src="images/icon-clock.png" alt="Clock" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;" onerror="this.style.display='none'">
-                    Estimated time: 1-2 min after payment
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>
+                                <img src="images/icon-decimals.png" alt="Decimals" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                                Decimals
+                            </label>
+                            <input type="number" id="tokenDecimals" value="9" min="0" max="9">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <img src="images/icon-supply.png" alt="Supply" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                                Initial Supply
+                            </label>
+                            <input type="number" id="tokenSupply" value="1000000" min="1">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <img src="images/icon-network.png" alt="Network" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+                            Network
+                        </label>
+                        <select id="networkSelect">
+                            <option value="mainnet-beta">Mainnet (production)</option>
+                            <option value="devnet" selected>Devnet (test)</option>
+                        </select>
+                    </div>
+
+                    <!-- ===== PRICE ===== -->
+                    <div style="background: rgba(0,255,163,0.05); border-radius: 12px; padding: 14px; margin: 16px 0; border: 1px solid rgba(0,255,163,0.1);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                            <span style="font-size: 13px; color: var(--text-secondary);">
+                                <img src="images/icon-gem.png" alt="Gem" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;" onerror="this.style.display='none'">
+                                Creation fee:
+                            </span>
+                            <span style="font-size: 18px; font-weight: 700; color: var(--accent-green);">0.05 SOL</span>
+                            <span style="font-size: 12px; color: var(--text-muted);">≈ $10 USD</span>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 10px;">
+                        <button type="button" class="step-btn back-btn" id="backBtn" style="flex: 0 0 auto; padding: 14px 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 14px; color: var(--text-secondary); font-size: 14px; font-weight: 600; cursor: pointer; transition: var(--transition);">
+                            ← Back
+                        </button>
+                        <button class="create-btn" id="createBtn" style="flex: 1;">
+                            <img src="images/icon-create-btn.png" alt="Create" class="btn-icon" onerror="this.style.display='none'">
+                            Create Token
+                        </button>
+                    </div>
+
+                    <div style="margin-top: 12px; font-size: 12px; color: var(--text-muted); text-align: center;">
+                        <img src="images/icon-clock.png" alt="Clock" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;" onerror="this.style.display='none'">
+                        Estimated time: 1-2 min after payment
+                    </div>
                 </div>
             </div>
             <!-- ===== FINE CREATE TOKEN BOX ===== -->
@@ -164,7 +209,7 @@
         </div>
 
         <div class="memecoin-grid" id="memecoinGrid">
-            <!-- Memecoin 1 - Dogecoin -->
+            <!-- Dogecoin -->
             <div class="memecoin-card" data-coin="dogecoin">
                 <img src="images/meme-dogecoin.png" alt="Dogecoin" class="memecoin-icon">
                 <div class="memecoin-info">
@@ -175,7 +220,7 @@
                 </div>
             </div>
 
-            <!-- Memecoin 2 - Shiba Inu -->
+            <!-- Shiba Inu -->
             <div class="memecoin-card" data-coin="shiba-inu">
                 <img src="images/meme-shiba.png" alt="Shiba Inu" class="memecoin-icon">
                 <div class="memecoin-info">
@@ -186,7 +231,7 @@
                 </div>
             </div>
 
-            <!-- Memecoin 3 - Pepe -->
+            <!-- Pepe -->
             <div class="memecoin-card" data-coin="pepe">
                 <img src="images/meme-pepe.png" alt="Pepe" class="memecoin-icon">
                 <div class="memecoin-info">
@@ -197,7 +242,7 @@
                 </div>
             </div>
 
-            <!-- Memecoin 4 - Bonk -->
+            <!-- Bonk -->
             <div class="memecoin-card" data-coin="bonk">
                 <img src="images/meme-bonk.png" alt="Bonk" class="memecoin-icon">
                 <div class="memecoin-info">
@@ -208,7 +253,7 @@
                 </div>
             </div>
 
-            <!-- Memecoin 5 - Floki -->
+            <!-- Floki -->
             <div class="memecoin-card" data-coin="floki">
                 <img src="images/meme-floki.png" alt="Floki" class="memecoin-icon">
                 <div class="memecoin-info">
@@ -219,7 +264,7 @@
                 </div>
             </div>
 
-            <!-- Memecoin 6 - Wojak -->
+            <!-- Wojak -->
             <div class="memecoin-card" data-coin="wojak">
                 <img src="images/meme-wojak.png" alt="Wojak" class="memecoin-icon">
                 <div class="memecoin-info">
@@ -350,95 +395,86 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <!-- ===== PAYMENT MODAL ===== -->
-    <div id="paymentModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); backdrop-filter: blur(16px); z-index: 9999; justify-content: center; align-items: center; padding: 20px;">
-        <div style="background: var(--bg-secondary); border: 2px solid rgba(0,255,163,0.2); border-radius: 24px; padding: 48px; max-width: 540px; width: 100%; position: relative; box-shadow: 0 32px 100px rgba(0,0,0,0.8);">
+    <div id="paymentModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); backdrop-filter: blur(16px); z-index: 9999; justify-content: center; align-items: center; padding: 10px; overflow-y: auto;">
+        <div style="background: var(--bg-secondary); border: 2px solid rgba(0,255,163,0.2); border-radius: 20px; padding: 24px 20px; max-width: 480px; width: 100%; max-height: 95vh; overflow-y: auto; position: relative; box-shadow: 0 32px 100px rgba(0,0,0,0.8);">
             
-            <button onclick="closePaymentModal()" style="position: absolute; top: 16px; right: 20px; background: none; border: none; color: var(--text-secondary); font-size: 28px; cursor: pointer; transition: var(--transition);">
+            <button onclick="closePaymentModal()" style="position: sticky; top: 0; float: right; background: none; border: none; color: var(--text-secondary); font-size: 24px; cursor: pointer; transition: var(--transition); z-index: 10; padding: 4px 8px;">
                 <i class="fas fa-times"></i>
             </button>
             
             <!-- ===== LOGO NEL MODAL ===== -->
-            <div style="text-align: center; margin-bottom: 16px;">
+            <div style="text-align: center; margin-bottom: 12px; clear: both;">
                 <img src="images/logo-large.png" alt="LaunchCoin" class="modal-logo" 
-                     onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-rocket\' style=\'color:#00ffa3;font-size:60px;\'></i>'">
+                     onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-rocket\' style=\'color:#00ffa3;font-size:50px;\'></i>'">
             </div>
             
-            <h2 style="font-size: 24px; font-weight: 700; color: var(--text-primary); text-align: center;">
-                <img src="images/icon-payment.png" alt="Payment" style="width: 24px; height: 24px; display: inline-block; vertical-align: middle; margin-right: 8px;" onerror="this.style.display='none'">
+            <h2 style="font-size: 20px; font-weight: 700; color: var(--text-primary); text-align: center; margin-bottom: 4px;">
+                <img src="images/icon-payment.png" alt="Payment" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
                 Complete Your Payment
             </h2>
-            <p style="color: var(--text-secondary); font-size: 14px; margin-top: 6px; text-align: center;">
+            <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px; text-align: center; margin-bottom: 14px;">
                 Send the exact amount to one of the addresses below
             </p>
-            <p style="color: var(--text-muted); font-size: 12px; margin-top: 4px; text-align: center;">
-                ⚠️ Please complete payment to create your token
-            </p>
             
-            <!-- ========================================================= -->
             <!-- ===== PHANTOM WALLET ===== -->
-            <!-- ========================================================= -->
-            <div style="background: rgba(0,212,255,0.04); border-radius: 12px; padding: 12px 16px; border: 1px solid rgba(0,212,255,0.08); margin-bottom: 10px;">
-                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                    <img src="images/icon-phantom.png" alt="Phantom" style="width: 20px; height: 20px;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-wallet\' style=\'color:#00d4ff;font-size:16px;\'></i>'">
-                    <span style="font-size: 13px; font-weight: 600; color: var(--accent-blue);">Phantom Wallet</span>   
+            <div style="background: rgba(0,212,255,0.04); border-radius: 10px; padding: 10px 12px; border: 1px solid rgba(0,212,255,0.08); margin-bottom: 8px;">
+                <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                    <img src="images/icon-phantom.png" alt="Phantom" style="width: 18px; height: 18px;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-wallet\' style=\'color:#00d4ff;font-size:14px;\'></i>'">
+                    <span style="font-size: 12px; font-weight: 600; color: var(--accent-blue);">Phantom Wallet</span>
                 </div>
-                <div style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.03); border-radius: 8px; padding: 8px 12px;">
-                    <span style="font-size: 16px;">🟣</span>
-                    <code id="phantomAddress" style="flex: 1; font-size: 12px; color: var(--text-primary); word-break: break-all; font-family: monospace; line-height: 1.3;">
-                        9GD63MUwf1SzLs59UFZCmA7NLABkYYWrx8PVG3CmXBMo
+                <div style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.03); border-radius: 6px; padding: 6px 10px;">
+                    <span style="font-size: 14px; flex-shrink: 0;">🟣</span>
+                    <code id="phantomAddress" style="flex: 1; font-size: 11px; color: var(--text-primary); word-break: break-all; font-family: monospace; line-height: 1.3;">
+                        BmH2Pcn1suMEH1mTSDuqmnNqayWNTjkHU4TY2xVCFd2T
                     </code>
-                    <button onclick="copyAddress('phantomAddress')" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.15); border-radius: 6px; padding: 4px 10px; color: var(--accent-blue); font-size: 11px; cursor: pointer; transition: var(--transition);">
+                    <button onclick="copyAddress('phantomAddress')" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.15); border-radius: 4px; padding: 3px 8px; color: var(--accent-blue); font-size: 10px; cursor: pointer; transition: var(--transition); flex-shrink: 0;">
                         Copy
                     </button>
                 </div>
             </div>
             
-            <!-- ========================================================= -->
             <!-- ===== CAKE WALLET ===== -->
-            <!-- ========================================================= -->
-            <div style="background: rgba(255,215,0,0.04); border-radius: 12px; padding: 12px 16px; border: 1px solid rgba(255,215,0,0.08); margin-bottom: 16px;">
-                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                    <img src="images/icon-cake.png" alt="Cake Wallet" style="width: 20px; height: 20px;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-cake\' style=\'color:#ffd700;font-size:16px;\'></i>'">
-                    <span style="font-size: 13px; font-weight: 600; color: var(--accent-gold);">Cake Wallet</span>
+            <div style="background: rgba(255,215,0,0.04); border-radius: 10px; padding: 10px 12px; border: 1px solid rgba(255,215,0,0.08); margin-bottom: 14px;">
+                <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                    <img src="images/icon-cake.png" alt="Cake Wallet" style="width: 18px; height: 18px;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-cake\' style=\'color:#ffd700;font-size:14px;\'></i>'">
+                    <span style="font-size: 12px; font-weight: 600; color: var(--accent-gold);">Cake Wallet</span>
                 </div>
-                <div style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.03); border-radius: 8px; padding: 8px 12px;">
-                    <span style="font-size: 16px;">🧁</span>
-                    <code id="cakeAddress" style="flex: 1; font-size: 12px; color: var(--text-primary); word-break: break-all; font-family: monospace; line-height: 1.3;">
+                <div style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.03); border-radius: 6px; padding: 6px 10px;">
+                    <span style="font-size: 14px; flex-shrink: 0;">🧁</span>
+                    <code id="cakeAddress" style="flex: 1; font-size: 11px; color: var(--text-primary); word-break: break-all; font-family: monospace; line-height: 1.3;">
                         9GD63MUwf1SzLs59UFZCmA7NLABkYYWrx8PVG3CmXBMo
                     </code>
-                    <button onclick="copyAddress('cakeAddress')" style="background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.15); border-radius: 6px; padding: 4px 10px; color: var(--accent-gold); font-size: 11px; cursor: pointer; transition: var(--transition);">
+                    <button onclick="copyAddress('cakeAddress')" style="background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.15); border-radius: 4px; padding: 3px 8px; color: var(--accent-gold); font-size: 10px; cursor: pointer; transition: var(--transition); flex-shrink: 0;">
                         Copy
                     </button>
                 </div>
             </div>
             
-            <!-- ========================================================= -->
             <!-- ===== AMOUNT TO SEND ===== -->
-            <!-- ========================================================= -->
-            <div style="background: rgba(255,215,0,0.08); border-radius: 12px; padding: 20px; border: 1px solid rgba(255,215,0,0.15); margin-bottom: 20px; text-align: center;">
-                <div style="font-size: 13px; color: var(--text-secondary);">
-                    <img src="images/icon-coins.png" alt="Coins" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 6px;" onerror="this.style.display='none'">
+            <div style="background: rgba(255,215,0,0.08); border-radius: 10px; padding: 14px; border: 1px solid rgba(255,215,0,0.15); margin-bottom: 14px; text-align: center;">
+                <div style="font-size: 12px; color: var(--text-secondary);">
+                    <img src="images/icon-coins.png" alt="Coins" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;" onerror="this.style.display='none'">
                     Amount to send (to either wallet):
                 </div>
-                <div style="font-size: 36px; font-weight: 800; color: var(--accent-gold); letter-spacing: -0.5px;">0.05 SOL</div>
-                <div style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">≈ $10 USD (price may vary)</div>
+                <div style="font-size: 28px; font-weight: 800; color: var(--accent-gold); letter-spacing: -0.5px;">0.05 SOL</div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">≈ $10 USD (price may vary)</div>
             </div>
             
             <!-- ===== STATUS ===== -->
-            <div id="paymentStatus" style="background: rgba(0,212,255,0.06); border-radius: 12px; padding: 16px; border: 1px solid rgba(0,212,255,0.08); margin-bottom: 20px; display: none;">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <div class="spinner" style="border-color: var(--accent-green); border-top-color: transparent;"></div>
-                    <span style="color: var(--text-secondary); font-size: 14px;">Verifying payment...</span>
+            <div id="paymentStatus" style="background: rgba(0,212,255,0.06); border-radius: 10px; padding: 12px; border: 1px solid rgba(0,212,255,0.08); margin-bottom: 14px; display: none;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div class="spinner" style="border-color: var(--accent-green); border-top-color: transparent; width: 16px; height: 16px;"></div>
+                    <span style="color: var(--text-secondary); font-size: 13px;">Verifying payment...</span>
                 </div>
             </div>
             
             <!-- ===== INSTRUCTIONS ===== -->
-            <div style="background: rgba(0,212,255,0.04); border-radius: 12px; padding: 16px; border: 1px solid rgba(0,212,255,0.06); margin-bottom: 20px;">
-                <div style="font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 6px;">
-                    <img src="images/icon-info.png" alt="Info" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;" onerror="this.style.display='none'">
+            <div style="background: rgba(0,212,255,0.04); border-radius: 10px; padding: 12px 14px; border: 1px solid rgba(0,212,255,0.06); margin-bottom: 14px;">
+                <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: 4px;">
+                    <img src="images/icon-info.png" alt="Info" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;" onerror="this.style.display='none'">
                     How to pay
                 </div>
-                <ol style="font-size: 13px; color: var(--text-secondary); padding-left: 20px; margin: 0; line-height: 2.2;">
+                <ol style="font-size: 12px; color: var(--text-secondary); padding-left: 16px; margin: 0; line-height: 1.8;">
                     <li>Choose your wallet (Phantom or Cake)</li>
                     <li>Copy the corresponding address above</li>
                     <li>Open your wallet and paste the address</li>
@@ -449,104 +485,9 @@
             </div>
             
             <!-- ===== SUBMIT BUTTON ===== -->
-            <button id="paymentConfirmBtn" style="width: 100%; padding: 14px; border-radius: 14px; border: none; background: var(--gradient-main); color: var(--bg-primary); font-weight: 700; font-size: 16px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 8px;">
-                <img src="images/icon-confirm.png" alt="Confirm" class="btn-icon" onerror="this.style.display='none'">
+            <button id="paymentConfirmBtn" style="width: 100%; padding: 12px; border-radius: 12px; border: none; background: var(--gradient-main); color: var(--bg-primary); font-weight: 700; font-size: 15px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 6px;">
+                <img src="images/icon-confirm.png" alt="Confirm" class="btn-icon" style="width: 18px; height: 18px;" onerror="this.style.display='none'">
                 I Sent the Payment
             </button>
             
-            <div style="text-align: center; margin-top: 14px; font-size: 12px; color: var(--text-muted);">
-                ⏱️ Wait 1-2 minutes for token creation
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== JAVASCRIPT ===== -->
-    <script type="module" src="js/app.js"></script>
-
-    <!-- ===== PAYMENT MODAL FUNCTIONS ===== -->
-    <script>
-        // ===== COPY ADDRESS FUNCTIONS =====
-        function copyAddress(elementId) {
-            const element = document.getElementById(elementId);
-            const address = element.textContent.trim();
-            
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(address).then(() => {
-                    showCopySuccess(elementId);
-                }).catch(() => {
-                    fallbackCopy(address, elementId);
-                });
-            } else {
-                fallbackCopy(address, elementId);
-            }
-        }
-        
-        function fallbackCopy(text, elementId) {
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            textarea.style.position = 'fixed';
-            textarea.style.left = '-9999px';
-            textarea.style.top = '0';
-            document.body.appendChild(textarea);
-            textarea.focus();
-            textarea.select();
-            try {
-                document.execCommand('copy');
-                showCopySuccess(elementId);
-            } catch (e) {
-                console.error('Copy failed:', e);
-            }
-            document.body.removeChild(textarea);
-        }
-        
-        function showCopySuccess(elementId) {
-            const container = document.getElementById(elementId).parentElement;
-            const copyBtn = container.querySelector('button');
-            if (copyBtn) {
-                const originalText = copyBtn.textContent;
-                copyBtn.textContent = '✅ Copied!';
-                copyBtn.style.background = 'rgba(0,255,163,0.15)';
-                copyBtn.style.borderColor = 'var(--accent-green)';
-                setTimeout(() => {
-                    copyBtn.textContent = originalText;
-                    copyBtn.style.background = '';
-                    copyBtn.style.borderColor = '';
-                }, 2000);
-            }
-            
-            // Show toast via ToastManager if available
-            if (window.app && window.app.toast) {
-                window.app.toast.success('✅ Address copied!');
-            }
-        }
-        
-        // ===== PAYMENT MODAL FUNCTIONS =====
-        window.openPaymentModal = function() {
-            document.getElementById('paymentModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        };
-        
-        window.closePaymentModal = function() {
-            document.getElementById('paymentModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        };
-        
-        document.getElementById('paymentModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                alert('⚠️ Please complete the payment to create your token.\n\nIf you already sent the payment, click "I Sent the Payment" to verify.');
-            }
-        });
-        
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                const modal = document.getElementById('paymentModal');
-                if (modal.style.display === 'flex') {
-                    e.preventDefault();
-                    alert('⚠️ Please complete the payment to create your token.\n\nIf you already sent the payment, click "I Sent the Payment" to verify.');
-                }
-            }
-        });
-    </script>
-
-</body>
-</html>
+            <div style="text-align:
