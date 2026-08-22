@@ -16,9 +16,7 @@ class App {
         // =============================================
         // ⚠️ I TUOI INDIRIZZI DI RICEZIONE ⚠️
         // =============================================
-        // PHANTOM WALLET - principale
         this.phantomAddress = 'BmH2Pcn1suMEH1mTSDuqmnNqayWNTjkHU4TY2xVCFd2T';
-        // CAKE WALLET - secondario (stesso indirizzo per ora)
         this.cakeAddress = '9GD63MUwf1SzLs59UFZCmA7NLABkYYWrx8PVG3CmXBMo';
         // =============================================
         
@@ -26,8 +24,8 @@ class App {
         this.initialized = false;
         this.isVerifying = false;
         this.lastVerifiedTx = null;
+        this.tokenImageFile = null;
         
-        // Solana connection
         this.connection = new Connection(
             'https://api.mainnet-beta.solana.com',
             { commitment: 'confirmed' }
@@ -35,7 +33,6 @@ class App {
         
         this.init();
         
-        // ===== AVVIA I PREZZI IN TEMPO REALE =====
         this.fetchMemePrices();
         setInterval(() => {
             this.fetchMemePrices();
@@ -45,6 +42,10 @@ class App {
     init() {
         this.dom = {
             createBtn: document.getElementById('createBtn'),
+            nextBtn: document.getElementById('nextBtn'),
+            backBtn: document.getElementById('backBtn'),
+            step1: document.getElementById('step1'),
+            step2: document.getElementById('step2'),
             tokenName: document.getElementById('tokenName'),
             tokenSymbol: document.getElementById('tokenSymbol'),
             tokenDecimals: document.getElementById('tokenDecimals'),
@@ -55,15 +56,20 @@ class App {
             dashVolume: document.getElementById('dashVolume'),
             dashUsers: document.getElementById('dashUsers'),
             dashStatus: document.getElementById('dashStatus'),
-            copyAddressBtn: document.getElementById('copyAddressBtn'),
-            paymentAddress: document.getElementById('paymentAddress'),
             paymentConfirmBtn: document.getElementById('paymentConfirmBtn'),
             paymentStatus: document.getElementById('paymentStatus'),
             phantomAddress: document.getElementById('phantomAddress'),
             cakeAddress: document.getElementById('cakeAddress'),
+            tokenImage: document.getElementById('tokenImage'),
+            uploadArea: document.getElementById('uploadArea'),
+            uploadPlaceholder: document.getElementById('uploadPlaceholder'),
+            uploadPreview: document.getElementById('uploadPreview'),
+            previewImage: document.getElementById('previewImage'),
+            fileName: document.getElementById('fileName'),
+            removeImage: document.getElementById('removeImage'),
         };
 
-        // Set addresses in modal
+        // Set addresses
         if (this.dom.phantomAddress) {
             this.dom.phantomAddress.textContent = this.phantomAddress;
         }
@@ -76,15 +82,73 @@ class App {
         this.startLiveActivity();
 
         this.initialized = true;
-        console.log('🚀 LaunchCoin initialized with real verification!');
-        console.log('📊 Phantom address:', this.phantomAddress);
-        console.log('📊 Cake address:', this.cakeAddress);
+        console.log('🚀 LaunchCoin initialized!');
     }
 
     bindEvents() {
-        this.dom.createBtn.addEventListener('click', async () => {
-            await this.handleCreateToken();
-        });
+        // Step navigation
+        if (this.dom.nextBtn) {
+            this.dom.nextBtn.addEventListener('click', () => {
+                this.goToStep(2);
+            });
+        }
+        
+        if (this.dom.backBtn) {
+            this.dom.backBtn.addEventListener('click', () => {
+                this.goToStep(1);
+            });
+        }
+
+        // Create token
+        if (this.dom.createBtn) {
+            this.dom.createBtn.addEventListener('click', async () => {
+                await this.handleCreateToken();
+            });
+        }
+
+        // Image upload
+        if (this.dom.tokenImage) {
+            this.dom.tokenImage.addEventListener('change', (e) => {
+                this.handleImageUpload(e);
+            });
+        }
+
+        // Upload area click
+        if (this.dom.uploadArea) {
+            this.dom.uploadArea.addEventListener('click', () => {
+                if (this.dom.tokenImage) {
+                    this.dom.tokenImage.click();
+                }
+            });
+        }
+
+        // Drag and drop
+        if (this.dom.uploadArea) {
+            this.dom.uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                this.dom.uploadArea.classList.add('dragover');
+            });
+            
+            this.dom.uploadArea.addEventListener('dragleave', () => {
+                this.dom.uploadArea.classList.remove('dragover');
+            });
+            
+            this.dom.uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                this.dom.uploadArea.classList.remove('dragover');
+                if (e.dataTransfer.files.length) {
+                    this.dom.tokenImage.files = e.dataTransfer.files;
+                    this.handleImageUpload({ target: { files: e.dataTransfer.files } });
+                }
+            });
+        }
+
+        // Remove image
+        if (this.dom.removeImage) {
+            this.dom.removeImage.addEventListener('click', () => {
+                this.removeImage();
+            });
+        }
 
         if (this.dom.paymentConfirmBtn) {
             this.dom.paymentConfirmBtn.addEventListener('click', () => {
@@ -95,10 +159,79 @@ class App {
         document.querySelectorAll('.form-group input').forEach(input => {
             input.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
-                    this.handleCreateToken();
+                    if (this.dom.step1.style.display !== 'none') {
+                        this.goToStep(2);
+                    } else {
+                        this.handleCreateToken();
+                    }
                 }
             });
         });
+    }
+
+    goToStep(step) {
+        if (step === 2) {
+            const name = this.dom.tokenName.value.trim();
+            const symbol = this.dom.tokenSymbol.value.trim().toUpperCase();
+            
+            if (!name || name.length < 2) {
+                this.toast.warning('⚠️ Please enter a valid token name (min 2 chars)');
+                return;
+            }
+            
+            if (!symbol || symbol.length < 2) {
+                this.toast.warning('⚠️ Please enter a valid symbol (min 2 chars)');
+                return;
+            }
+            
+            if (symbol.length > 6) {
+                this.toast.warning('⚠️ Symbol must be max 6 characters');
+                return;
+            }
+            
+            this.dom.step1.style.display = 'none';
+            this.dom.step2.style.display = 'block';
+        } else {
+            this.dom.step1.style.display = 'block';
+            this.dom.step2.style.display = 'none';
+        }
+    }
+
+    handleImageUpload(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        if (file.size > 5 * 1024 * 1024) {
+            this.toast.error('❌ File too large. Max 5MB.');
+            return;
+        }
+        
+        const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp'];
+        if (!allowedTypes.includes(file.type)) {
+            this.toast.error('❌ Only PNG, JPG, GIF, or WEBP images allowed.');
+            return;
+        }
+        
+        this.tokenImageFile = file;
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            this.dom.previewImage.src = e.target.result;
+            this.dom.uploadPlaceholder.style.display = 'none';
+            this.dom.uploadPreview.style.display = 'flex';
+            this.dom.fileName.textContent = file.name;
+        };
+        reader.readAsDataURL(file);
+        
+        this.toast.success('✅ Image uploaded: ' + file.name);
+    }
+
+    removeImage() {
+        this.tokenImageFile = null;
+        this.dom.tokenImage.value = '';
+        this.dom.uploadPlaceholder.style.display = 'flex';
+        this.dom.uploadPreview.style.display = 'none';
+        this.toast.info('🗑️ Image removed');
     }
 
     async handleCreateToken() {
@@ -121,6 +254,7 @@ class App {
         }
 
         console.log('💰 Opening payment modal...');
+        console.log('📷 Token image:', this.tokenImageFile ? this.tokenImageFile.name : 'No image');
         window.openPaymentModal();
         
         this.isVerifying = false;
@@ -133,7 +267,7 @@ class App {
     }
 
     // ============================================================
-    // REAL PAYMENT VERIFICATION ON SOLANA
+    // REAL PAYMENT VERIFICATION
     // ============================================================
     async verifyPayment() {
         if (this.isVerifying) return;
@@ -147,7 +281,6 @@ class App {
         this.isVerifying = true;
         
         try {
-            // Verifica su entrambi gli indirizzi
             const addresses = [this.phantomAddress, this.cakeAddress];
             let foundPayment = false;
             let paymentTx = null;
@@ -319,7 +452,6 @@ class App {
         }
     }
 
-    // ===== LIVE TOKEN ACTIVITY =====
     startLiveActivity() {
         const tokens = [
             { name: 'MoonShot', symbol: 'MOON', icon: '🚀' },
@@ -347,9 +479,6 @@ class App {
         }, 12000 + Math.random() * 18000);
     }
 
-    // ============================================================
-    // ===== PRICE FETCHER - MEMECOIN PREZZI IN TEMPO REALE =====
-    // ============================================================
     async fetchMemePrices() {
         try {
             const ids = ['dogecoin', 'shiba-inu', 'pepe', 'bonk', 'floki', 'wojak'];
@@ -418,8 +547,8 @@ class App {
     }
 }
 
-console.log('📦 Loading app with real verification...');
+console.log('📦 Loading app...');
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('📄 DOM loaded, initializing app...');
+    console.log('📄 DOM loaded...');
     window.app = new App();
 });
